@@ -11,6 +11,12 @@
 </p>
 
 <p>
+  <strong>End date:</strong>
+  <%= @end %>
+</p>
+
+
+<p>
   <strong>Title:</strong>
   <%= @event.title %>
 </p>
@@ -29,6 +35,18 @@
   <strong>Location:</strong>
   <%= @event.location %>
 </p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @admin.email %>
+</p>
+
+<p>
+  <strong>Participants :</strong>
+  <%= @event.users.count %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

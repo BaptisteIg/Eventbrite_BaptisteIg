@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, exept: [:index, :show]
   # GET /events
   # GET /events.json
   def index
@@ -10,6 +10,9 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @admin = User.find(@event.admin_id)
+
+    @end = end_date
   end
 
   # GET /events/new
@@ -70,5 +73,11 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location, :admin_id)
+    end
+
+    def end_date
+      @event = Event.find(params[:id])
+
+      @event.start_date + @event.duration*60
     end
 end
